@@ -1,5 +1,5 @@
 """
-BOT_TOKEN = "8498132889:AAGX4wTJrkyX1ISKP1LTeHYSaL_EQ2Jhdps"
+BOT_TOKEN = "8498132889:AAH5n2_pv96aY7_dQO8cLiPWZ2dJlPtNLew"
 SECRET_KEY = "Azad873_SUPER_SECURE_FAKE_TRACKING_KEY_97f2b1e6c4a39d"
 Simple IMEI simulation Telegram bot (single-file version).
 
