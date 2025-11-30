@@ -1,0 +1,38 @@
+[project]
+name = "imei-simulator-bot"
+version = "0.1.0"
+description = "Telegram bot that simulates IMEI-based phone tracking for educational purposes."
+authors = [{ name = "IMEI Simulator", email = "example@example.com" }]
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+  "python-telegram-bot[webhooks]==20.8",
+  "pydantic-settings>=2.0.0",
+  "python-dotenv>=1.0.0",
+  "asyncpg>=0.29.0",
+  "SQLAlchemy[asyncio]>=2.0.0",
+  "alembic>=1.13.0",
+  "redis>=5.0.0",
+  "aiohttp>=3.9.0",
+  "humanize>=4.9.0",
+  "orjson>=3.9.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "pytest-asyncio>=0.23.0",
+  "fakeredis>=2.23.0",
+  "ruff>=0.6.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+ignore = []
+select = ["E", "F", "W", "I", "B"]
