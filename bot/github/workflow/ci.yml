@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: ["main", "master"]
+  pull_request:
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        working-directory: ./bot
+        run: |
+          python -m pip install --upgrade pip
+          pip install .[dev]
+
+      - name: Lint with ruff
+        working-directory: ./bot
+        run: |
+          ruff src tests
+
+      - name: Run tests
+        working-directory: ./bot
+        run: |
+          pytest -q
+
+      - name: Build Docker image
+        working-directory: ./bot
+        run: |
+          docker build -t ghcr.io/${{ github.repository }}/imei-simulator-bot:${{ github.sha }} .
+
+      - name: Log in to GitHub Container Registry
+        if: github.ref == 'refs/heads/main'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Push Docker image
+        if: github.ref == 'refs/heads/main'
+        run: |
+          docker push ghcr.io/${{ github.repository }}/imei-simulator-bot:${{ github.sha }}
