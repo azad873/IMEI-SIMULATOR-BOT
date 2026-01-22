@@ -1,0 +1,20 @@
+import time
+import random
+
+def sms_simulator(number, count, delay):
+    print(f"\nStarting SMS simulation for number: {number}\n")
+
+    for i in range(1, count + 1):
+        status = random.choice(["SENT", "QUEUED", "BLOCKED"])
+        print(f"[{i}] SMS attempt → {number} | Status: {status}")
+        time.sleep(delay)
+
+    print("\nSimulation finished.")
+    print("No real SMS were sent. This was a local simulation.\n")
+
+if __name__ == "__main__":
+    number = input("Enter mobile number (simulation only): ")
+    count = int(input("How many SMS attempts to simulate: "))
+    delay = float(input("Delay between attempts (seconds): "))
+
+    sms_simulator(number, count, delay)
